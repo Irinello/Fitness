@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--=============== FAVICON ===============-->
+        <link rel="shortcut icon" href="Photo/favicon.ico" type="image/x-icon">
+
+        <!--=============== REMIXICON ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="payment.css">
+
+        <title>PowerZone Fittnes</title>
+    </head>
+
+    <body>
+       <div class="container">
+            <form action="">
+                <div class="row">
+                    <div class="colum">
+                        <h3 class="title">Payment</h3>
+                        <div class="input_box">
+                            <span>Cards Accepted: </span>
+                            <img src="Photo/cards2.jpeg" alt="">
+                        </div>
+                        <div class="input_box">
+                            <span>Name: </span>
+                            <input type="text" id="card_name" placeholder="Mr. Adrian">
+                            <small>Error message here</small>
+                        </div>
+                        <div class="input_box">
+                            <span>Credit Card Number: </span>
+                            <input type="number" id="card_number" placeholder="1111 2222 3333 4444">
+                            <small>Error message here</small>
+                        </div>
+                        <div class="input_box">
+                            <span>Exp. Month: </span>
+                            <input type="text" id="exp_month" placeholder="July">
+                            <small>Error message here</small>
+                        </div>
+
+                        <div class="flex">
+                            <div class="input_box">
+                                <span>Exp. Year: </span>
+                                <input type="number" id="exp_year" placeholder="2025">
+                                <small>Error message here</small>
+                            </div>
+                            <div class="input_box">
+                                <span>CVV: </span>
+                                <input type="number" id="cvv" placeholder="123">
+                                <small>Error message here</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="colum">
+                        <h3 class="title">Billing Address</h3>
+                        <div class="input_box">
+                            <span>Full Name: </span>
+                            <input type="text" id="full_name" placeholder="Adrian">
+                            <small>Error message here</small> 
+                        </div>
+                        <div class="input_box">
+                            <span>Email: </span>
+                            <input type="email" id="email" placeholder="Adrian@gmail.com">
+                            <small>Error message here</small>
+                        </div>
+                        <div class="input_box">
+                            <span>Address: </span>
+                            <input type="text" id="address" placeholder="Stret - Locality">
+                            <small>Error message here</small>
+                        </div>
+                        <div class="input_box">
+                            <span>City: </span>
+                            <input type="text" id="city" placeholder="Sibiu">
+                            <small>Error message here</small>
+                        </div>
+
+                        <div class="flex">
+                            <div class="input_box">
+                                <span>State: </span>
+                                <input type="text" id="state" placeholder="Romania">
+                                <small>Error message here</small>
+                            </div>
+                            <div class="input_box">
+                                <span>Zip Code: </span>
+                                <input type="number" id="zip_code" placeholder="247055">
+                                <small>Error message here</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" onclick="confirmPayment()" >Unlock</button>
+
+                <p id="successMessage" class="message success">Payment successful! Redirecting...</p>
+                <p id="errorMessage" class="message error">Payment failed. Please try again.</p>
+
+
+            </form>
+       </div> 
+
+    </body>
+
+
+    <SCript src="payment.js"></SCript>
+
+</html>

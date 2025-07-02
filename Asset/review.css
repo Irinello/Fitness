@@ -1,0 +1,803 @@
+@import url("https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&family=Playfair+Display:ital,wght@400;700;900&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(200, 70%, 80%); /* Un albastru pastel plăcut */
+  --first-color-light: hsl(
+    200,
+    90%,
+    90%
+  ); /* O versiune mai deschisă a culorii principale */
+  --first-color-alt: hsl(200, 60%, 75%); /* O variație subtilă pentru accente */
+  --first-color-dark: hsl(200, 50%, 60%); /* O nuanță puțin mai închisă */
+  --first-color-gray: hsl(200, 10%, 85%); /* Gri pastel, subtil */
+  --title-color: hsl(
+    210,
+    25%,
+    98%
+  ); /* Un albastru foarte închis pentru titluri */
+  --title-color-black: hsl(212, 60%, 51%); /* Aproape negru */
+  --text-color: hsl(204, 100%, 99%); /* Gri mediu pentru text */
+  --text-color-light: hsl(
+    200,
+    10%,
+    50%
+  ); /* O nuanță mai deschisă pentru text */
+  --body-color: hsl(210, 94%, 14%); /* Fundal deschis, pastel */
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Playfair Display";
+  --second-font: "Miltonian Tattoo";
+  --biggest-font-size: 2rem;
+  --bigger-font-size: 1.5rem;
+  --big-font-size: 1.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  /*========== Font weight ==========*/
+  --font-bold: 700;
+  --font-black: 900;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/* Responsive typography */
+@media screen and (min-width: 1024px) {
+  :root {
+    --biggest-font-size: 6rem;
+    --bigger-font-size: 3.5rem;
+    --big-font-size: 2.75rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1124px;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.section {
+  padding: 4.5rem 0 2rem;
+}
+
+.section__data {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.75rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section__title,
+.section__title-border {
+  font-size: var(--big-font-size);
+  letter-spacing: 1.5px;
+}
+
+.section__subtitle {
+  font-size: var(--h2-font-size);
+  font-family: var(--second-font);
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  color: var(--first-color);
+  transform: rotate(-2deg);
+}
+
+.section__titles {
+  display: flex;
+  column-gap: 0.75rem;
+  justify-content: center;
+}
+
+.section__title-border {
+  -webkit-text-stroke: 1px var(--text-color);
+  color: transparent;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.main {
+  overflow: hidden; /* For animation ScrollReveal */
+}
+
+.color-red {
+  color: hsl(0, 80%, 64%);
+}
+
+.color-green {
+  color: var(--first-color);
+}
+
+/*=============== HEADER & NAV ===============*/
+.header {
+  width: 100%;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  transition: background-color 0.3s;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.nav__logo {
+  color: var(--title-color);
+  display: flex;
+}
+
+.nav__logo {
+  align-items: center;
+  column-gap: 0.5rem;
+  font-weight: var(--font-bold);
+}
+
+.nav__logo img {
+  width: 2rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .nav__menu {
+    position: fixed;
+    background-color: hsl(210, 94%, 14%);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100%;
+    border-left: 2px solid var(--first-color-gray);
+    transition: right 0.3s;
+  }
+}
+
+/* Change background header */
+.bg-header {
+  background-color: var(--body-color);
+  box-shadow: 0 4px 8px hsl(212, 60%, 51%);
+}
+
+/*=============== BUTTON ===============*/
+nav button {
+  background-color: var(--first-color-dark);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  top: 20px;
+  right: 20px;
+}
+
+/* Active link */
+.active-link {
+    color: var(--first-color);
+}
+  
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem;
+  font-size: var(--big-font-size);
+  max-width: 800px;
+  margin: 3rem auto 0;
+  line-height: 1.6;
+  background: var(--body-color);
+  box-shadow: 0px 4px 10px rgb(255, 255, 255);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Animatie fade-in */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stilizare titlu principal */
+.article h1 {
+    font-size: 5rem;
+    font-weight: var(--font-black);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+    position: relative;
+}
+
+/* Linie animată sub titlu */
+.article h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--first-color);
+    margin: 8px auto 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.article h1:hover::after {
+    width: 120px;
+}
+
+/* Stilizare subtitluri */
+.article h2 {
+    font-size: var(--h1-font-size);
+    color: var(--title-color);
+    margin-top: 2rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: slideIn 0.6s ease-out forwards 0.3s;
+}
+
+/* Animatie subtitluri */
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stilizare paragrafe */
+.article p {
+    font-size: var(--h3-font-size);
+    color: var(--text-color);
+    max-width: 700px;
+    text-align: justify;
+    margin-bottom: 1rem;
+    transition: background 0.3s ease-in-out, padding 0.3s ease-in-out;
+    padding: 0.5rem;
+}
+
+/* Highlight la hover pe paragrafe */
+.article p:hover {
+    background:var(--first-color-dark);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+/* Lista factori */
+.article ul {
+    text-align: left;
+    max-width: 700px;
+    padding-left: 0;
+    margin-top: 1rem;
+    list-style: none;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: slideIn 0.6s ease-out forwards 0.5s;
+}
+
+/* Stilizare elemente listă */
+.article ul li {
+    font-size: var(--h3-font-size);
+    margin-bottom: 0.8rem;
+    padding-left: 2rem;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Iconiță în listă */
+.article ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--first-color-dark);
+    font-weight: bold;
+}
+
+/* Efect de hover pe listă */
+.article ul li:hover {
+    transform: translateX(5px);
+}
+
+/* Animație pe secțiuni */
+.article h2,
+.article p,
+.article ul {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: slideIn 0.6s ease-out forwards 0.3s;
+}
+
+
+/* Photo 1 */
+
+.photo-ps {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 2rem;
+}
+
+.photo-ps img {
+  height: 400px; 
+  width: 100%; 
+  max-width: 650px; 
+  object-fit: cover; 
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-ps img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 30px rgb(255, 255, 255);
+}
+
+/*Importanta Sportului*/
+
+/* Stilizare titlu principal */
+.article-sport h1 {
+  font-size: 5rem;
+  font-weight: var(--font-black);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+  position: relative;
+  text-align: center;
+}
+
+/* Linie animată sub titlu */
+.article-sport h1::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: var(--first-color);
+  margin: 8px auto 0;
+  transition: width 0.3s ease-in-out;
+}
+
+.article-sport h1:hover::after {
+  width: 140px;
+}
+
+/* Stilizare container */
+.article-sport {
+  max-width: 1100px; /* Mai lat decât originalul */
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgb(255, 255, 255);
+  text-align: center;
+}
+
+/* Stilizare subtitluri */
+.article-sport h3 {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  margin-top: 2rem;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: slideIn 0.6s ease-out forwards 0.3s;
+}
+
+/* Stilizare paragrafe */
+.article-sport p {
+  font-size: var(--h3-font-size);
+  color: var(--text-color);
+  text-align: justify;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  transition: background 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.article-sport p:hover {
+  background: var(--first-color-dark);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* Stilizare lista */
+.article-sport ul {
+  text-align: left;
+  padding-left: 0;
+  margin-top: 1rem;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: slideIn 0.6s ease-out forwards 0.5s;
+}
+
+/* Stilizare elemente lista */
+.article-sport ul li {
+  font-size: var(--h3-font-size);
+  margin-bottom: 0.8rem;
+  padding-left: 2rem;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+.article-sport ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--first-color-dark);
+  font-weight: bold;
+}
+
+.article-sport ul li:hover {
+  transform: translateX(5px);
+}
+
+/* Animatie pe sectiuni */
+@keyframes slideIn {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.article-sport h3,
+.article-sport p,
+.article-sport ul {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: slideIn 0.6s ease-out forwards 0.3s;
+}
+
+
+/* Photo2 */
+
+.photo-ip {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 2rem;
+}
+
+.photo-ip img {
+  height: 400px; 
+  width: 100%; 
+  max-width: 650px; 
+  object-fit: cover; 
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-ip img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 20px 30px rgb(255, 255, 255);
+}
+
+/* Contact Form */
+
+/* Containerul care va ține formularul și footer-ul */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; /* Distanta între formular și footer */
+  flex-wrap: wrap;
+  padding: 3rem;
+}
+
+form {
+  background: var(--first-color-alt );
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-size: 18px;
+  color: #000;
+}
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #000;
+}
+button {
+  background: #28a745;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+/* Loader rotativ */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #555;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Tooltip-style message */
+
+.form-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tooltip-message {
+  display: none;
+  position: relative;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: white;
+  background-color: #333;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Săgeata tip tooltip */
+.tooltip-message::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: #333;
+}
+
+/* Stiluri pentru succes și eroare */
+.tooltip-message.success {
+  background-color: #28a745;
+}
+
+.tooltip-message.success::before {
+  border-right-color: #28a745;
+}
+
+.tooltip-message.error {
+  background-color: #dc3545;
+}
+
+.tooltip-message.error::before {
+  border-right-color: #dc3545;
+}
+
+
+
+/* Grupul footer */
+.footer__group {
+  width: 60%; /* Lățimea mai mare a footer-ului */
+  text-align: center;
+  margin: 2rem auto; /* Centerare pe axa orizontală */
+}
+
+.footer__group ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Mărim distanța între iconițe */
+  padding: 0;
+}
+
+.footer__group a {
+  font-size: 4rem; /* Mărim iconițele */
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.footer__group a:hover {
+  color: var(--first-color-alt);
+}
+
+.ctn__title{
+  font-size: 2rem;
+}
+
+.footer__copy{
+ justify-content: left;
+ padding: 1rem;
+ font-size: var(--smaller-font-size);
+ color: var(--text-color-light);
+}
+
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -30%;
+  background-color: var(--first-color-dark);
+  display: inline-flex;
+  padding: 0.35rem;
+  color: var(--title-color-black);
+  font-size: 1.25rem;
+  z-index: var(--z-tooltip);
+  transition: 0.4s;
+  border-radius: 20%;
+}
+
+.scrollup:hover {
+  background-color: white;
+  transform: translateY(-0.25rem);
+}
+
+/* Show Scroll Up*/
+.show-scroll {
+  bottom: 3rem;
+}
+
+/* ===================== Responsive 1024px ===================== */
+@media screen and (max-width: 1024px) {
+  .article h1,
+  .article-sport h1 {
+    font-size: 3.5rem;
+  }
+
+  .photo-ps img {
+    height: 300px;
+  }
+}
+
+/* ===================== Responsive 768px ===================== */
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 0 1rem;
+  }
+
+  .article,
+  .article-sport {
+    padding: 2rem 1rem;
+  }
+
+  .article h1,
+  .article-sport h1 {
+    font-size: 2.5rem;
+  }
+
+  .article p,
+  .article ul li,
+  .article-sport p,
+  .article-sport ul li {
+    font-size: var(--normal-font-size);
+  }
+
+  .photo-ps {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .photo-ps img {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+/* ===================== Responsive 480px - telefoane mici ===================== */
+@media screen and (max-width: 480px) {
+  .article h1,
+  .article-sport h1 {
+    font-size: 2rem;
+  }
+
+  .section__title,
+  .section__title-border {
+    font-size: var(--h2-font-size);
+  }
+
+  .section__subtitle {
+    font-size: var(--h3-font-size);
+  }
+
+  nav button {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+
+  .article,
+  .article-sport {
+    margin: 2rem 0.5rem;
+    padding: 1rem;
+  }
+
+  .ctn__title{
+    font-size: 1rem;
+  }
+
+  .footer__group{
+    font-size: 1.5rem;
+  }
+
+  .footer__social{
+    font-size: 1rem;
+  }
+}

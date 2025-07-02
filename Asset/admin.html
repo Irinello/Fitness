@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="Photo/favicon.ico" type="image/x-icon" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Admin Panel</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <aside class="sidebar">
+      <ul>
+        <li onclick="navigateTo('Home')">Home</li>
+        <li onclick="navigateTo('subscriptions')">Abonamente</li>
+      </ul>
+    </aside>
+
+    <main class="admin-container">
+      <section class="admin-dashboard">
+        <h2>Bine ai venit, Admin!</h2>
+        <p>Gestionează utilizatorii și abonamentele cu ușurință.</p>
+      </section>
+
+      
+      <section class="user-management">
+        <h3>Lista Utilizatorilor</h3>
+        <div class="table-container">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Subscription</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>JohnDoe</td>
+                        <td>johndoe@example.com</td>
+                        <td>Premium</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>JaneDoe</td>
+                        <td>janedoe@example.com</td>
+                        <td>Free</td>
+                    </tr>
+
+                    <tr>
+                      <td>3</td>
+                      <td>JaneDoe</td>
+                      <td>janedoe@example.com</td>
+                      <td>Free</td>
+                  </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+
+    <section class="subscription-management">
+      <h3>Modificare Abonamente</h3>
+      <label for="user-select-subscription">Selectează utilizator:</label>
+      <select id="user-select-subscription"></select>
+      <label for="subscription">Abonament:</label>
+      <select id="subscription">
+          <option value="basic">Essential</option>
+          <option value="premium">Premium</option>
+          <option value="gold">Luxury</option>
+      </select>
+      <button onclick="updateSubscription()">Salvează</button>
+  </section>
+  
+  <section class="delete-user">
+      <h3>Gestionare Utilizatori</h3>
+      <p>Alege un utilizator pentru a-l șterge din sistem:</p>
+      <div class="delete-user-container">
+          <select id="user-delete-select">
+              <option disabled selected>Alege utilizator</option>
+          </select>
+          <button class="delete-button" onclick="EraseUser()">Șterge</button>
+      </div>
+  </section>
+  
+
+      
+    </main>
+  </body>
+
+  <script defer src="admin.js"></script>
+</html>
